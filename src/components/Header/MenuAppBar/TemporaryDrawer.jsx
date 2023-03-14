@@ -10,46 +10,46 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import PropTypes from 'prop-types';
 
 export default function TemporaryDrawer(props) {
-	const {openDrawer, setOpenDrawer} = props
+	const {openDrawer, setOpenDrawer} = props;
 
-	const toggleDrawer = (open) => (event) => {
+
+	const handleClose=(open)=>(event)=>{
 		if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
 			return;
 		}
-		console.log(openDrawer)
-		setOpenDrawer(open);
-	};
-
+		setOpenDrawer(false)
+	}
 	const list = () => (
 		<Box
-			sx={{ width: 250 }}
+			sx={{width: 250}}
 			role="presentation"
-			onClick={toggleDrawer(false)}
-			onKeyDown={toggleDrawer(false)}
+			onClick={handleClose(false)}
+			onKeyDown={handleClose(false)}
 		>
 			<List>
 				{['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
 					<ListItem key={text} disablePadding>
 						<ListItemButton>
 							<ListItemIcon>
-								{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+								{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
 							</ListItemIcon>
-							<ListItemText primary={text} />
+							<ListItemText primary={text}/>
 						</ListItemButton>
 					</ListItem>
 				))}
 			</List>
-			<Divider />
+			<Divider/>
 			<List>
 				{['All mail', 'Trash', 'Spam'].map((text, index) => (
 					<ListItem key={text} disablePadding>
 						<ListItemButton>
 							<ListItemIcon>
-								{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+								{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
 							</ListItemIcon>
-							<ListItemText primary={text} />
+							<ListItemText primary={text}/>
 						</ListItemButton>
 					</ListItem>
 				))}
@@ -59,16 +59,21 @@ export default function TemporaryDrawer(props) {
 
 	return (
 		<div>
-			{
-				<React.Fragment key={'left'}>
-					<Button onClick={toggleDrawer(true)}>Open</Button>
-					<Drawer
-						open={openDrawer}
-						onClose={toggleDrawer(false)}
-					>
-						{list()}
-					</Drawer>
-				</React.Fragment>			}
+			<React.Fragment>
+				<Drawer
+					open={openDrawer}
+					onClose={handleClose(false)}
+				>
+					{list()}
+				</Drawer>
+			</React.Fragment>
 		</div>
 	);
+}
+
+
+//it is check props
+TemporaryDrawer.propTypes={
+	openDrawer:PropTypes.bool,
+	setOpenDrawer:PropTypes.func
 }
