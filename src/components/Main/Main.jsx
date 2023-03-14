@@ -3,7 +3,7 @@ import TemporaryDrawer from "../Header/MenuAppBar/TemporaryDrawer";
 import {Container, Paper, ThemeProvider} from "@mui/material";
 import styles from "./main.module.css"
 import Box from "@mui/material/Box";
-import gTheme from '../../Utils/Themes'
+import gTheme from '../../Utils/themes'
 
 function Main() {
 

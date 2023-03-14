@@ -12,20 +12,15 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import TemporaryDrawer from "./TemporaryDrawer";
-import {useContext, useState} from "react";
-import Button from "@mui/material/Button";
-import {red} from "@mui/material/colors";
-import context from '../../../Utils/Context'
+import {useState} from "react";
+import ModeSwitcher from "../../ModeSwitcher/ModeSwitcher";
+import SwitchThemes from "../../../Utils/materialUISwitch";
 
 export default function MenuAppBar() {
 	const [auth, setAuth] = useState(true);
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [openDrawer,setOpenDrawer]=useState(false)
-	const value = useContext(context);
-	const {mode,setMode}=value;
-	const handleChange = (event) => {
-		setAuth(event.target.checked);
-	};
+
 
 	const handleAccountMenu = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -60,36 +55,12 @@ export default function MenuAppBar() {
 						>
 							<MenuIcon />
 						</IconButton>
+
 						<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
 							<span style={{color:"red"}}>Inter</span>preter
 						</Typography>
-						<FormGroup>
-							<Button
-								variant="outlined"
-								onClick={() => {
-									if (mode === 'light') {
-										setMode('dark');
-									} else {
-										setMode('light');
-									}
-								}}
-							>
-								{mode === 'light' ? 'Dark' : 'Light'}
-							</Button>
-							<FormControlLabel
-								control={
-									<Switch
-										checked={auth}
-										onChange={handleChange}
-										aria-label="login switch"
-										color="secondary"
-									/>
-								}
-								label={auth ? 'Logout' : 'Login'}
-							/>
-						</FormGroup>
-						{auth && (
 							<div>
+								<ModeSwitcher />
 								<IconButton
 									size="large"
 									aria-label="account of current user"
@@ -119,7 +90,7 @@ export default function MenuAppBar() {
 									<MenuItem onClick={handleClose}>My account</MenuItem>
 								</Menu>
 							</div>
-						)}
+
 					</Toolbar>
 				</AppBar>
 			</Box>

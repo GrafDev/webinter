@@ -1,40 +1,21 @@
-import React, {useState} from "react";
-import Header from "../Header/Header";
-import Main from "../Main/Main";
-import ListContext from "@mui/material/List/ListContext";
-import Context from "../../Utils/Context";
+import React,{useEffect, useState} from 'react'
 import {
 	Experimental_CssVarsProvider as CssVarsProvider,
-	useColorScheme,
 } from '@mui/material/styles';
+import Header from "../Header/Header";
+import Main from "../Main/Main";
+import ModeSwitcher from "../ModeSwitcher/ModeSwitcher";
+
+
+
 
 function App() {
-	const {mode, setMode} = useColorScheme();
-	const [mounted, setMounted] = useState(false);
-
-	React.useEffect(() => {
-		setMounted(true);
-	}, []);
-
-	if (!mounted) {
-		// for server-side rendering
-		// learn more at https://github.com/pacocoursey/next-themes#avoid-hydration-mismatch
-		return null;
-	}
-	const value = {
-		mode,
-		setMode
-	}
-
-
 	return (
-		<Context.Provider className='App' value={value}>
-			<CssVarsProvider>
+		<CssVarsProvider>
 				<Header/>
 				<Main/>
-			</CssVarsProvider>
-		</Context.Provider>
-	)
+		</CssVarsProvider>
+	);
 }
 
 export default App;
